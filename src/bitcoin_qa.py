@@ -193,15 +193,23 @@ async def main(message: cl.Message):
     else:
         # Format results as table
         if result['results']:
-            headers = result['results'][0].keys()
-            rows = [list(row.values()) for row in result['results']]
-            table = tabulate(rows, headers=headers, tablefmt="grid")
-            response += f"Results:\n```\n{table}\n```"
+            try:
+                headers = result['results'][0].keys()
+                rows = [list(row.values()) for row in result['results']]
+                table = tabulate(rows, headers=headers, tablefmt="grid")
+                response += f"Results:\n```\n{table}\n```"
+            except Exception as e:
+                response += f"Error formatting results: {str(e)}\n"
+                response += f"Raw results: {result['results']}"
         else:
             response += "No results found."
     
     # Send response
     await cl.Message(content=response).send()
+    
+    # Also print to terminal for debugging
+    print("\nChainlit Response:")
+    print(response)
 
 if __name__ == "__main__":
     # This will be handled by Chainlit
