@@ -1,0 +1,12 @@
+requests
+schedule
+python-dotenv
+openai>=1.12.0
+tabulate
+chainlit>=0.7.700
+pydantic==1.10.13
+typing-extensions
+fastapi
+uvicorn
+starlette
+anyio 
