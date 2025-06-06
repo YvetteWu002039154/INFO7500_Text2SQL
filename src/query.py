@@ -187,11 +187,11 @@ def get_complex_query_3(db_path):
         bv.height,
         datetime(bv.timestamp, 'unixepoch') as block_time,
         ROUND(bv.total_volume / 100000000.0, 8) as total_volume_btc,
-        as.unique_addresses,
-        ROUND(as.avg_output_per_address / 100000000.0, 8) as avg_output_per_address_btc,
-        ROUND(as.percent_repeated_addresses, 2) as percent_repeated_addresses
+        addr_stats.unique_addresses,
+        ROUND(addr_stats.avg_output_per_address / 100000000.0, 8) as avg_output_per_address_btc,
+        ROUND(addr_stats.percent_repeated_addresses, 2) as percent_repeated_addresses
     FROM block_volumes bv
-    JOIN address_stats as ON bv.height = as.height
+    JOIN address_stats addr_stats ON bv.height = addr_stats.height
     ORDER BY bv.height DESC
     LIMIT 3;
     """
@@ -203,17 +203,17 @@ if __name__ == "__main__":
     print("Starting script...")
     start_time = time.time()
     
-    print("\nExecuting Query 2: High-value transactions with multiple inputs and outputs")
+    print("\nExecuting Query 3: Blocks with high transaction volume and address statistics")
     print("-" * 80)
     try:
-        results2 = get_complex_query_2(db_path)
-        print(f"Query 2 returned {len(results2)} results")
-        if results2:
-            print(tabulate(results2, headers=["TXID", "Output (BTC)", "Height", "Block Time"], tablefmt="grid"))
+        results3 = get_complex_query_3(db_path)
+        print(f"Query 3 returned {len(results3)} results")
+        if results3:
+            print(tabulate(results3, headers=["Height", "Block Time", "Volume (BTC)", "Unique Addresses", "Avg Output/Address (BTC)", "% Repeated Addresses"], tablefmt="grid"))
         else:
-            print("No results found for Query 2")
+            print("No results found for Query 3")
     except Exception as e:
-        print(f"Error in Query 2: {str(e)}")
+        print(f"Error in Query 3: {str(e)}")
     
     end_time = time.time()
     print(f"\nQuery execution time: {end_time - start_time:.2f} seconds")
