@@ -67,15 +67,6 @@ This project provides tools for synchronizing Bitcoin blockchain data, storing i
   - OpenAI API key
   - Database configuration
 
-#### `requirements.txt`
-
-- Lists project dependencies:
-  - requests==2.31.0
-  - schedule==1.2.1
-  - python-dotenv==1.0.0
-  - openai==1.3.0
-  - tabulate==0.9.0
-
 ### Data Files
 
 #### `bitcoin.db`
@@ -206,6 +197,10 @@ python bitcoin_qa.py
 - The project requires a running Bitcoin node with RPC access
 - OpenAI API key is required for natural language queries
 - Database synchronization can take significant time depending on the blockchain size
-- Pruned blocks are automatically handled during synchronization
+- Pruned blocks are automatically handled during synchronization (SIZE~500)
 - The sync process runs every 5 minutes to keep the database updated
 - All errors are logged for debugging and monitoring
+
+## Problem Setss
+
+- Both passed test cases and failed cases are put in the file docs/HW3
