@@ -2,6 +2,9 @@
 
 This project provides tools for synchronizing Bitcoin blockchain data, storing it in a SQLite database, and querying it using natural language processing.
 
+The following link is the demo video:
+https://drive.google.com/file/d/16Emeh5oOQDblymXymB4lSMZUsZKpDR94/view?usp=sharing
+
 ## Project Structure
 
 ### Core Files
